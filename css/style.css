@@ -8,7 +8,8 @@
     rgba(19, 19, 21, 0.795) 20%, rgba(41, 41, 45, 1) 30%, 
     rgb(19, 19, 21) 43%, rgb(19, 19, 21) 86%, rgb(41, 41, 45) 100%), radial-gradient(rgba(0, 255, 128, 0.171)   1px, transparent 1px);
  }
-*{
+ 
+ *{
     margin: 0;
     padding: 0;
     box-sizing:border-box;
@@ -21,12 +22,6 @@
 }
 body{
     font-family: "Poppins", serif; 
-}
-.estrela {
-    fill: white; /* Cor Verde Neon */
-    stroke: #009E5A; /* Contorno mais escuro */
-    stroke-width: 5;
-    filter: drop-shadow(0 0 10px #60F47B);
 }
 section{
     padding: 2.7rem 0;
@@ -41,34 +36,24 @@ header{
     padding: 15px 0;
     background: rgba(19, 19, 21, 0.973);
 }
- 
 .logo img{
     width: 50px;
 }
-
 .background-verde{
-   background: var(--color-grad); 
-}
-.container{
-    max-width: 1440px;
-    padding: 0 5%;
-    margin: 0 auto;
-}
-main {
+    background: var(--color-grad); 
+ }
+ main {
     /* background-image: url('../img/main.png'); */
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center;
     min-height: 50vh;
 }
- 
 nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    
-    
 }
 .container .logo{
     display: flex;
@@ -78,10 +63,9 @@ nav{
     font-size: 30px;
     font-weight: bold;
     color: var(--verde);
-    
 }
 .text-green{
-color: var(--verde);
+    color: var(--verde);
 }
 .menu{
     display: flex;
@@ -91,11 +75,9 @@ color: var(--verde);
     margin: 0 35px;
     font-size: 15px;
 }
-
 .menu li a{
     color: white;
 }
-
 .btn-gradient{
     padding: 10px 25px ;
     border: none;
@@ -110,16 +92,7 @@ color: var(--verde);
     background-repeat: no-repeat, repeat;
     background-blend-mode: overlay;
 }
-main .container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 115px;
-    padding: 10px;
-}
 
-
- 
 .select-text,
 .main-text{
     width: 80%;
@@ -128,7 +101,6 @@ main .container{
     margin-top: 30px;
     transition: 0.3ms;
 }
-
 
 .main-text div{
     display: flex;
@@ -154,7 +126,6 @@ main .container{
     position: relative;
     z-index: 10;
 }
-
 .resultados{
     background: #60F47B;
 }
@@ -164,11 +135,13 @@ main .container{
     align-items: center;
     justify-content: space-between;
 }
+
 .sub-title{
     color: var(--verde);
     font-weight: bold;
     font-size: 2.0rem;
     margin: 0 auto;
+    text-align: center;
 }
 .container .sub-title h3{
     color: white;
@@ -176,17 +149,15 @@ main .container{
     font-weight: 300;
     text-align: center;
 }
-
 .resultados .resultado-text{
     color: white;
     font-size: 1.6rem;
     font-weight: 600;
     text-align: center;
 }
-
 .resultados .resultado-numero{
     color: white;
-     display: flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
 }
@@ -195,6 +166,7 @@ main .container{
     margin: 0 30px;
     font-size: 20px;
 }
+
 .seguimentos .container .select-text{
     color: black;
     padding: 10px;
@@ -210,16 +182,12 @@ main .container{
 }
 .select-text h2{
     font-size: 1.4rem;
-}
-.background-celebro{
-    background-image: url('../img/celebro.png');
-}
+} 
 
 .resultados .resultado-numero span{
     font-weight: 500;
     font-size: 30px;
 }
-
 .saiba-mais{
     text-decoration: none;
     text-align: center;
@@ -227,6 +195,7 @@ main .container{
     font-weight: bold;
     margin: 0 auto
 }
+
 .card img{
     margin: 0 auto;
 }
@@ -235,6 +204,7 @@ main .container{
     justify-content: space-between;
     margin: 30px auto;
 }
+
 .diferencias .card {
     width: 30%;
     cursor: pointer;
@@ -254,6 +224,7 @@ main .container{
     margin: 13px 0;
     font-weight: 600;
 }
+
 .seguimentos .container{
     display: flex;
     align-items: center;
@@ -261,6 +232,7 @@ main .container{
 .seguimentos .container .img{
     width: 50%;
 }
+
 .seguimentos .container .seguimento-text{
     width: 50%;
     padding-left: 60px;
@@ -289,34 +261,25 @@ main .container{
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     text-decoration: none;
 }
-
 .load-up{
     opacity: 0;
     transform: translateY(230px);
     transition: opacity 1.7s ease-out, transform 1.7s ease-out;
 }
-
 .load-down{
     opacity: 0;
     transform: translateY(-230px);
     transition: opacity 2.7s ease-out, transform 2.7s ease-out;
 }
-
 /* Quando a classe "show" é adicionada, a animação ocorre */
 .load-up.show, .load-down.show{
     opacity: 1;
     transition: 1.7s;
     transform: translateY(0);
 }
-
 .load-to-left{
     opacity: 0;
     transform: translateX(230px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.load-to-right {
-    opacity: 0;
-    transform: translateX(-230px);
     transition: opacity 1s ease-out, transform 1s ease-out;
 }
 .load-to-right.show,
@@ -325,12 +288,30 @@ main .container{
     transition: 1.7s;
     transform: translateX(0);
 }
+.load-to-right {
+    opacity: 0;
+    transform: translateX(-230px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+main .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 115px;
+    /* padding: 10px; */
+}
 
+ .container{
+    max-width: 1440px;
+    /* padding: 0 5%; */
+    margin: 0 auto;
+}
  
 
 @media (max-width: 966px){
     .menu-icon{
         display: block;
+        margin-right: 4%;
     }
     .menu{
         position: fixed;
@@ -367,7 +348,10 @@ main .container{
         justify-content: center;
     }
     main .container .main-text h1{
-        font-size: 4rem;
+        font-size: 2rem;
+    }
+    main .container .main-text h2{
+        font-size: 1.2rem;
     }
     .resultados .container{
         flex-direction: column;
@@ -384,7 +368,8 @@ main .container{
         flex-direction: column;
     }
     .diferencias .card{
-        width: 100%;
+        width: 92%;
+        margin: 0 auto;
     }
     .seguimentos .container{
         flex-direction: column-reverse;
@@ -392,15 +377,19 @@ main .container{
     .seguimentos .no-reverse{
         flex-direction: column
     }
-    seguimentos .container .img,
+    .seguimentos .container .img,
     .seguimentos .container .seguimento-text{
         width: 100%;
     }
-}
-
-@media (max-width: 450px){
-    .resultado-numero{
-        flex-direction: column;
+    .seguimentos .container .seguimento-text{
+        padding-left: 20px;
     }
 
+    .load-to-left{
+        opacity: 0;
+        transform: translateZ(0px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+   
 }
+ 

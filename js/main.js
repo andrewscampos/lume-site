@@ -1,6 +1,5 @@
 var menu  = document.querySelector('.menu-icon')
-
-menu.addEventListener('click', () => {
+function openCLose(){
     let item = document.querySelector('.menu') 
     if(!item.classList.contains('ativo')){
         item.classList.add('ativo')
@@ -10,6 +9,9 @@ menu.addEventListener('click', () => {
         document.querySelector('.menu-icon img').src = 'img/menu.png'
 
     }
+}
+menu.addEventListener('click', () => {
+    openCLose()
 })
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -39,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const targetElement = document.getElementById(targetId);
 
             if (targetElement) {
+                openCLose()
                 const offset = 110; // Ajuste de 30px
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
