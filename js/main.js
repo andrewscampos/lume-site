@@ -41,7 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const targetElement = document.getElementById(targetId);
 
             if (targetElement) {
-                openCLose()
+                if(targetId != 'home'){
+                    openCLose()
+                }
                 const offset = 110; // Ajuste de 30px
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 

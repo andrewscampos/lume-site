@@ -277,16 +277,11 @@ nav{
     transition: 1.7s;
     transform: translateY(0);
 }
-.load-to-left{
-    opacity: 0;
-    transform: translateX(230px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.load-to-right.show,
-.load-to-left.show{
+ 
+.load-to-right.show{
     opacity: 1;
     transition: 1.7s;
-    transform: translateX(0);
+    transform: translateZ(0);
 }
 .load-to-right {
     opacity: 0;
@@ -384,7 +379,14 @@ main .container{
     .seguimentos .container .seguimento-text{
         padding-left: 20px;
     }
-
+    footer .container div{
+        flex-direction: column;
+       
+    }
+    footer .container div {
+        text-align: center;
+        margin: 0 auto;
+    }
     .load-to-left{
         opacity: 0;
         transform: translateZ(0px);
