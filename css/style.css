@@ -7,7 +7,10 @@
     --color-grad: linear-gradient(321deg, rgb(19, 19, 21) 0%,
     rgba(19, 19, 21, 0.795) 20%, rgba(41, 41, 45, 1) 30%, 
     rgb(19, 19, 21) 43%, rgb(19, 19, 21) 86%, rgb(41, 41, 45) 100%), radial-gradient(rgba(0, 255, 128, 0.171)   1px, transparent 1px);
- }
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+  }
  
  *{
     margin: 0;
@@ -21,6 +24,7 @@
     filter: drop-shadow(0 0 10px #60F47B);
 }
 body{
+    
     font-family: "Poppins", serif; 
 }
 section{
@@ -277,11 +281,28 @@ nav{
     transition: 1.7s;
     transform: translateY(0);
 }
+.load-to-left.show{
+    -webkit-animation-name: backInRight;
+    animation-name: backInRight;
+    
+}
  
+
+.load-to-left-animate {
+    -webkit-animation-duration: 2.7s;
+    animation-duration: 2.7s;
+    -webkit-animation-duration: var(--animate-duration);
+    animation-duration: var(--animate-duration);
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+  
+   
+
 .load-to-right.show{
     opacity: 1;
     transition: 1.7s;
-    transform: translateZ(0);
+    transform: translateX(0);
 }
 .load-to-right {
     opacity: 0;
@@ -303,6 +324,62 @@ main .container{
 }
  
 
+.animate__animated {
+    opacity: 0;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    /* -webkit-animation-duration: var(--animate-duration);
+    animation-duration: var(--animate-duration); */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .animate__backInRight {
+    
+    -webkit-animation-name: backInRight;
+    animation-name: backInRight;
+  }
+  
+  @-webkit-keyframes backInRight {
+     0% {
+      -webkit-transform: translateX(2000px) scale(0.7);
+      transform: translateX(2000px) scale(0.7);
+      opacity: 0;
+    }
+  
+    80% {
+      -webkit-transform: translateX(0px) scale(0.7);
+      transform: translateX(0px) scale(0.7);
+      opacity: 0;
+    }
+  
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes backInRight {
+    0% {
+      -webkit-transform: translateX(2000px) scale(0.7);
+      transform: translateX(2000px) scale(0.7);
+      opacity: 0;
+    }
+  
+    80% {
+      -webkit-transform: translateX(0px) scale(0.7);
+      transform: translateX(0px) scale(0.7);
+      opacity: 0.7;
+    }
+  
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
 @media (max-width: 966px){
     .menu-icon{
         display: block;
@@ -387,11 +464,7 @@ main .container{
         text-align: center;
         margin: 0 auto;
     }
-    .load-to-left{
-        opacity: 0;
-        transform: translateZ(0px);
-        transition: opacity 1s ease-out, transform 1s ease-out;
-    }
+    
    
 }
  

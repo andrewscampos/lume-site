@@ -15,8 +15,9 @@ menu.addEventListener('click', () => {
 })
 
 document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll(".load-up, .load-down, .load-to-left, .load-to-right");
+    const elements = document.querySelectorAll(".load-up, .load-down,   .load-to-right");
 
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -31,6 +32,30 @@ document.addEventListener("DOMContentLoaded", function () {
         observer.observe(element);
     });
 }); 
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".load-to-left");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+                                        //entry.target.classList.remove('animate__animated', 'animate__backInRight');
+
+                    entry.target.classList.add('animate__animated','animate__backInRight');
+                    setTimeout(() => {
+                        entry.target.classList.remove('animate__animated','animate__backInRight');
+                    }, 1500);
+                }else{
+                    setTimeout(() => {
+                        entry.target.classList.remove('animate__animated','animate__backInRight');
+                    }, 1500);
+                }
+        });
+    }, { threshold: 0.1 }); // Ativa quando 50% do elemento estiver visível
+
+    elements.forEach((element) => observer.observe(element));
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
