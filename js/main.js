@@ -80,3 +80,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+const tiposSites = document.getElementById('tipos-sites');
+
+tiposSites.addEventListener('click', function() {
+    window.location.href = "tipos-sites.html";
+
+});
+
+const adicionais = document.getElementById('adicionais');
+
+adicionais.addEventListener('click', function() {
+    window.location.href = "adicionais.html";
+
+});
+
+const prazos = document.getElementById('prazos');
+
+prazos.addEventListener('click', function() {
+    window.location.href = "prazos.html";
+
+});
