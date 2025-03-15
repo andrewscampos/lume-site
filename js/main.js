@@ -102,3 +102,49 @@ prazos.addEventListener('click', function() {
     window.location.href = "prazos.html";
 
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Impede o recarregamento da página
+
+        // Capturar valores do formulário
+        const formData = {
+            nome: form.querySelector("input[placeholder='Nome*']").value.trim(),
+            email: form.querySelector("input[placeholder='E-mail*']").value.trim(),
+            empresa: form.querySelector("input[placeholder='Empresa*']").value.trim(),
+            cargo: form.querySelector("input[placeholder='Cargo*']").value.trim(),
+            telefone: form.querySelector("input[placeholder='Telefone*']").value.trim(),
+            mensagem: form.querySelector("textarea[placeholder='Mensagem']").value.trim()
+        };
+
+        // Validação básica
+        if (!formData.nome || !formData.email || !formData.telefone || !formData.mensagem) {
+            alert("Por favor, preencha todos os campos obrigatórios!");
+            return;
+        }
+
+        try {
+            // Enviar dados via POST em formato JSON
+            const response = await fetch("https://seu-endpoint.com/api/formulario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert("Mensagem enviada com sucesso!");
+                form.reset(); // Limpar o formulário após o envio
+            } else {
+                alert("Erro ao enviar a mensagem. Tente novamente mais tarde.");
+            }
+        } catch (error) {
+            console.error("Erro ao enviar formulário:", error);
+            alert("Ocorreu um erro. Verifique sua conexão e tente novamente.");
+        }
+    });
+});
