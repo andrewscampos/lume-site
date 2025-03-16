@@ -126,25 +126,28 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        try {
-            // Enviar dados via POST em formato JSON
-            const response = await fetch("https://seu-endpoint.com/api/formulario", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                alert("Mensagem enviada com sucesso!");
-                form.reset(); // Limpar o formulário após o envio
-            } else {
-                alert("Erro ao enviar a mensagem. Tente novamente mais tarde.");
-            }
-        } catch (error) {
-            console.error("Erro ao enviar formulário:", error);
-            alert("Ocorreu um erro. Verifique sua conexão e tente novamente.");
+        if (!formData.nome || !formData.email || !formData.telefone || !formData.mensagem) {
+            alert("Por favor, preencha todos os campos obrigatórios!");
+            return;
         }
+    
+        // Montar a mensagem formatada para o WhatsApp
+        const mensagem = `Olá! Tenho interesse e gostaria de mais informações.
+    
+        🔹 Nome: ${formData.nome}
+        📧 E-mail: ${formData.email}
+        🏢 Empresa: ${formData.empresa}
+        💼 Cargo: ${formData.cargo}
+        📞 Telefone: ${formData.telefone}
+        📝 Mensagem: ${formData.mensagem}`;
+    
+        // Codificar a mensagem para URL
+        const urlWhatsapp = `https://wa.me/5516998653237?text=${encodeURIComponent(mensagem)}`;
+    
+        // Abrir o WhatsApp
+        window.open(urlWhatsapp, "_blank");
+    
+        // Limpar o formulário
+        form.reset();
     });
 });
