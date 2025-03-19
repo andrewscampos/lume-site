@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         📝 Mensagem: ${formData.mensagem}`;
     
         // Codificar a mensagem para URL
-        const urlWhatsapp = `https://wa.me/551699865-3237?text=${encodeURIComponent(mensagem)}`;
+        const urlWhatsapp = `https://wa.me/5516998653237?text=${encodeURIComponent(mensagem)}`;
     
         // Abrir o WhatsApp
         window.open(urlWhatsapp, "_blank");
