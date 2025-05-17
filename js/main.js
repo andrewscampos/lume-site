@@ -102,15 +102,13 @@ prazos.addEventListener('click', function() {
     window.location.href = "prazos.html";
 
 });
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Impede o recarregamento da página
 
-        // Capturar valores do formulário
+       // Capturar valores do formulário
         const formData = {
             nome: form.querySelector("input[placeholder='Nome*']").value.trim(),
             email: form.querySelector("input[placeholder='E-mail*']").value.trim(),
@@ -126,28 +124,25 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (!formData.nome || !formData.email || !formData.telefone || !formData.mensagem) {
-            alert("Por favor, preencha todos os campos obrigatórios!");
-            return;
+        try {
+            // Enviar dados para a API via POST
+            const responseProspect = await fetch("https://sb-sunrize-app-0-0-0-1.onrender.com/lume/save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            // window.open(urlWhatsapp, "_blank");
+            
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Ocorreu um erro, mas você ainda pode enviar pelo WhatsApp.');
+            window.open(urlWhatsapp, "_blank");
         }
-    
-        // Montar a mensagem formatada para o WhatsApp
-        const mensagem = `Olá! Tenho interesse e gostaria de mais informações.
-    
-        🔹 Nome: ${formData.nome}
-        📧 E-mail: ${formData.email}
-        🏢 Empresa: ${formData.empresa}
-        💼 Cargo: ${formData.cargo}
-        📞 Telefone: ${formData.telefone}
-        📝 Mensagem: ${formData.mensagem}`;
-    
-        // Codificar a mensagem para URL
-        const urlWhatsapp = `https://wa.me/5516998653237?text=${encodeURIComponent(mensagem)}`;
-    
-        // Abrir o WhatsApp
-        window.open(urlWhatsapp, "_blank");
-    
-        // Limpar o formulário
         form.reset();
     });
+    
+     
 });
