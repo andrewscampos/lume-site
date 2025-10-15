@@ -1,0 +1,40 @@
+<svg width="300" height="100" viewBox="0 0 350 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <radialGradient id="swarm-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" style="stop-color:#60F47B;stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color:#60F47B;stop-opacity:0"></stop>
+        </radialGradient>
+    </defs>
+    
+    <g transform="translate(60, 75)">
+        <circle cx="0" cy="0" r="25" fill="#60F47B" opacity="0.2"></circle>
+        <text x="0" y="5" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle" fill="#60F47B">&lt;/&gt;</text>
+
+        <circle r="6" fill="url(#swarm-glow)">
+            <animateMotion dur="6s" repeatCount="indefinite" path="M -30,0 Q -15,-20 0,-15 Q 15,-10 25,5 Q 15,20 0,15 Q -15,10 -30,0"></animateMotion>
+            <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" begin="0.5s"></animate>
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" begin="1s"></animate>
+        </circle>
+
+        <circle r="5" fill="url(#swarm-glow)">
+            <animateMotion dur="5s" repeatCount="indefinite" path="M 30,0 Q 15,20 0,15 Q -15,10 -25,-5 Q -15,-20 0,-15 Q 15,-10 30,0" begin="1s"></animateMotion>
+            <animate attributeName="r" values="5;7;5" dur="2.5s" repeatCount="indefinite" begin="1.2s"></animate>
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="3.5s" repeatCount="indefinite" begin="0.5s"></animate>
+        </circle>
+
+        <circle r="4" fill="url(#swarm-glow)">
+            <animateMotion dur="7s" repeatCount="indefinite" path="M 0,-25 Q 20,-15 28,0 Q 20,15 0,25 Q -20,15 -28,0 Q -20,-15 0,-25" begin="2s"></animateMotion>
+            <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite" begin="0.8s"></animate>
+            <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite" begin="1.8s"></animate>
+        </circle>
+
+         <circle r="3" fill="url(#swarm-glow)">
+            <animateMotion dur="8s" repeatCount="indefinite" path="M -40,-10 Q -20,-30 0,-25 Q 20,-10 35,5 Q 20,25 0,20 Q -20,10 -40,-10" begin="0.3s"></animateMotion>
+            <animate attributeName="r" values="3;5;3" dur="2.2s" repeatCount="indefinite" begin="2s"></animate>
+            <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.2s" repeatCount="indefinite" begin="2.5s"></animate>
+        </circle>
+    </g>
+
+    <text x="100" y="80" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="start" fill="#60F47B">LUMICODE</text>
+    <text x="100" y="100" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#60F47B" opacity="0.7">swarm intelligence</text>
+</svg>
