@@ -1,4 +1,4 @@
-<svg width="300" height="100" viewBox="0 0 350 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="450" height="100" viewBox="0 0 450 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
         <radialGradient id="swarm-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
             <stop offset="0%" style="stop-color:#60F47B;stop-opacity:1"></stop>
@@ -6,7 +6,7 @@
         </radialGradient>
     </defs>
     
-    <g transform="translate(60, 75)">
+    <g transform="translate(60, 50)">
         <circle cx="0" cy="0" r="25" fill="#60F47B" opacity="0.2"></circle>
         <text x="0" y="5" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle" fill="#60F47B">&lt;/&gt;</text>
 
@@ -35,6 +35,6 @@
         </circle>
     </g>
 
-    <text x="100" y="80" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="start" fill="#60F47B">LUMICODE</text>
-    <text x="100" y="100" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#60F47B" opacity="0.7">swarm intelligence</text>
+    <text x="100" y="50" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="start" fill="#60F47B">LUMICODE</text>
+    <text x="107" y="75" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#60F47B" opacity="0.7">swarm intelligence</text>
 </svg>
