@@ -256,6 +256,132 @@
             margin-bottom: 2rem;
         }
 
+        /* Estilos para HTML dinâmico no conteúdo */
+        .post-content h2 {
+            font-size: 2rem;
+            color: var(--verde);
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(96, 244, 123, 0.2);
+        }
+
+        .post-content h3 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: 600;
+            margin: 2.5rem 0 1.25rem;
+        }
+
+        .post-content h4 {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .post-content a {
+            color: var(--verde);
+            text-decoration: underline;
+            transition: all 0.3s ease;
+        }
+
+        .post-content a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid var(--verde);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #cbd5e1;
+            background: rgba(96, 244, 123, 0.05);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+        }
+
+        .post-content code {
+            background: rgba(96, 244, 123, 0.1);
+            color: var(--verde);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .post-content pre {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border: 1px solid #2a2a2a;
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .post-content strong {
+            color: var(--verde);
+            font-weight: 700;
+        }
+
+        .post-content em {
+            color: #cbd5e1;
+        }
+
+        .post-content hr {
+            border: none;
+            border-top: 2px solid rgba(96, 244, 123, 0.2);
+            margin: 3rem 0;
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .post-content th,
+        .post-content td {
+            padding: 1rem;
+            border: 1px solid #2a2a2a;
+            text-align: left;
+        }
+
+        .post-content th {
+            background: rgba(96, 244, 123, 0.1);
+            color: var(--verde);
+            font-weight: 700;
+        }
+
+        .post-content tr:hover {
+            background: rgba(96, 244, 123, 0.05);
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -571,7 +697,7 @@
         const { createRouter, createWebHashHistory } = VueRouter;
 
         // Configuração da API
-        const API_BASE_URL = 'http://localhost:10005/api/blog/lumicode';
+        const API_BASE_URL = 'https://api.lumigateway.com.br/lumi-blog/api/blog/lumicode';
 
         // Categorias
         const CATEGORIES = {
@@ -745,8 +871,8 @@
                     try {
                         const posts = await store.loadPosts();
                         this.filteredPosts = posts
-                            .filter(p => utils.isPublished(p.publishDate))
-                            .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+                            .filter(p => utils.isPublished(p.data))
+                            .sort((a, b) => new Date(b.data) - new Date(a.data));
                     } catch (error) {
                         console.error('Erro ao carregar posts:', error);
                     } finally {
@@ -787,9 +913,7 @@
                             <span><i class="far fa-calendar"></i> {{ formatDate(post.publishDate) }}</span>
                             <span><i class="far fa-clock"></i> {{ post.readTime }} min de leitura</span>
                         </div>
-                        <div class="post-content">
-                            <p v-for="(p, i) in contentParagraphs" :key="i">{{ p }}</p>
-                        </div>
+                        <div class="post-content" v-html="post.content"></div>
                     </article>
                     
                     <div v-else class="empty-state">
@@ -807,11 +931,6 @@
                     post: null,
                     loading: false
                 };
-            },
-            computed: {
-                contentParagraphs() {
-                    return this.post?.content?.split('\n\n').filter(p => p.trim()) || [];
-                }
             },
             methods: {
                 formatDate: utils.formatDate,
@@ -891,7 +1010,7 @@
             mounted() {
                 this.loadSidebarAds();
 
-                // Escutar evento de post carregado
+                // // Escutar evento de post carregado
                 this.$root.$on('post-loaded', (post) => {
                     this.sidebarAds = store.getActiveAds(post);
                 });
