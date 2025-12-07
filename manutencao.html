@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Blog</title>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Axios para requisições HTTP -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #ecf0f1;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-color: #bdc3c7;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        #app {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 25px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .header-title h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-color), #5dade2);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            min-width: 150px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .loading-spinner {
+            border: 4px solid var(--light-bg);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--accent-color);
+            background: var(--light-bg);
+        }
+
+        .tab-button.active::after {
+            transform: scaleX(1);
+        }
+
+        .content-panel {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .panel-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .panel-header h2 {
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .required-mark {
+            color: var(--danger-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #2c3e50;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: var(--white);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #c0392b;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: var(--white);
+        }
+
+        .btn-warning:hover:not(:disabled) {
+            background: #d68910;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 25px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .data-table thead {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        .data-table tbody tr {
+            background: var(--white);
+            transition: background 0.2s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--light-bg);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .nested-section {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border: 2px solid var(--border-color);
+        }
+
+        .nested-section-header {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nested-section-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .nested-item {
+            background: var(--white);
+            padding: 18px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: var(--shadow);
+        }
+
+        .nested-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 15px;
+        }
+
+        .nested-item-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 15px;
+        }
+
+        .nested-item-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .nested-item-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state-text {
+            font-size: 16px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            gap: 5px;
+        }
+
+        .badge-primary {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--accent-color);
+        }
+
+        .badge-success {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-container {
+                width: 100%;
+            }
+
+            .stat-card {
+                flex: 1;
+                min-width: auto;
+            }
+
+            .data-table {
+                font-size: 13px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>
+                        <i class="fas fa-blog"></i>
+                        Sistema de Gerenciamento de Blog
+                    </h1>
+                    <p>Gerencie blogs, posts e anúncios de forma profissional e eficiente</p>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-card-label">Total de Blogs</div>
+                        <div class="stat-card-value">{{ totalBlogs }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div v-if="loading" class="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Carregando dados...</p>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div v-if="alertMessage" :class="['alert', alertType === 'success' ? 'alert-success' : 'alert-error']">
+            <i :class="alertType === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'"></i>
+            {{ alertMessage }}
+        </div>
+
+        <!-- Tabs -->
+        <div v-if="!loading" class="tabs">
+            <button class="tab-button" :class="{ active: activeTab === 'blogs' }" @click="changeTab('blogs')">
+                <i class="fas fa-home"></i>
+                Blogs
+            </button>
+            <button class="tab-button" :class="{ active: activeTab === 'posts' }" @click="activeTab = 'posts'">
+                <i class="fas fa-file-alt"></i>
+                Posts
+            </button>
+        </div>
+
+        <!-- Blog Management -->
+        <div v-show="activeTab === 'blogs' && !loading" class="content-panel">
+            <div class="panel-header">
+                <h2>
+                    <i class="fas fa-cog"></i>
+                    Gerenciamento de Blogs
+                </h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>
+                        Nome do Blog
+                        <span class="required-mark">*</span>
+                    </label>
+                    <input v-model="currentBlog.nome" type="text" placeholder="Digite o nome do blog">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Categoria
+                        <span class="required-mark">*</span>
+                    </label>
+                    <input v-model="currentBlog.categoria" type="text" placeholder="Digite a categoria">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary" @click="saveBlog" :disabled="saving">
+                    <i :class="saving ? 'fas fa-spinner fa-spin' : (editingBlogId ? 'fas fa-save' : 'fas fa-plus')"></i>
+                    {{ saving ? 'Salvando...' : (editingBlogId ? 'Atualizar Blog' : 'Cadastrar Blog') }}
+                </button>
+                <button v-if="editingBlogId" class="btn btn-secondary" @click="cancelBlogEdit">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- Blogs List -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input v-model="blogSearch" type="text" placeholder="Buscar blogs...">
+            </div>
+
+            <div v-if="filteredBlogs.length === 0" class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <p class="empty-state-text">Nenhum blog encontrado</p>
+            </div>
+
+            <table v-else class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Posts</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="blog in filteredBlogs" :key="blog.id">
+                        <td>{{ blog.id }}</td>
+                        <td>
+                            <strong>{{ blog.nome }}</strong>
+                        </td>
+                        <td>
+                            <span class="badge badge-primary">
+                                <i class="fas fa-tag"></i>
+                                {{ blog.categoria }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">
+                                <i class="fas fa-file-alt"></i>
+                                {{ blog.posts ? blog.posts.length : 0 }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-warning btn-sm" @click="editBlog(blog)">
+                                    <i class="fas fa-edit"></i>
+                                    Editar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Post Management -->
+        <div v-show="activeTab === 'posts' && !loading" class="content-panel">
+            <div class="panel-header">
+                <h2>
+                    <i class="fas fa-pen"></i>
+                    Gerenciamento de Posts
+                </h2>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Selecione o Blog
+                    <span class="required-mark">*</span>
+                </label>
+                <select v-model="selectedBlogForPost" @change="onBlogSelect">
+                    <option value="">-- Selecione um blog --</option>
+                    <option v-for="blog in blogs" :key="blog.id" :value="blog.id">
+                        {{ blog.nome }}
+                    </option>
+                </select>
+            </div>
+
+            <div v-if="selectedBlogForPost" class="form-grid">
+                <div class="form-group">
+                    <label>
+                        Título
+                        <span class="required-mark">*</span>
+                    </label>
+                    <input v-model="currentPost.title" type="text" placeholder="Título do post">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Slug
+                        <span class="required-mark">*</span>
+                    </label>
+                    <input v-model="currentPost.slug" type="text" placeholder="slug-do-post">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Categoria
+                        <span class="required-mark">*</span>
+                    </label>
+                    <input v-model="currentPost.category" type="text" placeholder="Categoria">
+                </div>
+                <div class="form-group">
+                    <label>Sub-categoria</label>
+                    <input v-model="currentPost.subCategory" type="text" placeholder="Sub-categoria">
+                </div>
+                <div class="form-group">
+                    <label>URL da Imagem</label>
+                    <input v-model="currentPost.imageUrl" type="url" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Tempo de Leitura</label>
+                    <input v-model="currentPost.readTime" type="text" placeholder="5 min">
+                </div>
+            </div>
+
+            <div v-if="selectedBlogForPost" class="form-grid">
+                <div class="form-group">
+                    <label>Resumo</label>
+                    <textarea v-model="currentPost.excerpt" placeholder="Breve descrição do post"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Conteúdo
+                        <span class="required-mark">*</span>
+                    </label>
+                    <textarea v-model="currentPost.content" placeholder="Conteúdo completo do post"></textarea>
+                </div>
+            </div>
+
+            <!-- Ads dentro do Post -->
+            <div v-if="selectedBlogForPost" class="nested-section">
+                <div class="nested-section-header">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Anúncios do Post</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Título do Anúncio</label>
+                        <input v-model="currentAd.title" type="text" placeholder="Título">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input v-model="currentAd.description" type="text" placeholder="Descrição">
+                    </div>
+                    <div class="form-group">
+                        <label>URL da Imagem</label>
+                        <input v-model="currentAd.imageUrl" type="url" placeholder="https://exemplo.com/ad.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Call to Action (CTA)</label>
+                        <input v-model="currentAd.cta" type="text" placeholder="Saiba Mais">
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-sm" @click="addAdToPost">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Anúncio
+                </button>
+
+                <div v-if="currentPost.ads && currentPost.ads.length > 0">
+                    <div v-for="(ad, index) in currentPost.ads" :key="index" class="nested-item">
+                        <div class="nested-item-header">
+                            <div>
+                                <div class="nested-item-title">{{ ad.title }}</div>
+                                <p class="nested-item-description">{{ ad.description }}</p>
+                                <div class="nested-item-meta" v-if="ad.imageUrl">
+                                    <i class="fas fa-image"></i>
+                                    {{ ad.imageUrl }}
+                                </div>
+                                <div class="nested-item-meta" v-if="ad.cta">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    CTA: {{ ad.cta }}
+                                </div>
+                            </div>
+                            <button class="btn btn-danger btn-sm" @click="removeAdFromPost(index)">
+                                <i class="fas fa-trash"></i>
+                                Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="selectedBlogForPost" class="form-actions">
+                <button class="btn btn-primary" @click="savePost" :disabled="saving">
+                    <i
+                        :class="saving ? 'fas fa-spinner fa-spin' : (editingPostIndex !== null ? 'fas fa-save' : 'fas fa-plus')"></i>
+                    {{ saving ? 'Salvando...' : (editingPostIndex !== null ? 'Atualizar Post' : 'Cadastrar Post') }}
+                </button>
+                <button v-if="editingPostIndex !== null" class="btn btn-secondary" @click="cancelPostEdit">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- Posts List -->
+            <div v-if="selectedBlogForPost" class="search-box">
+                <i class="fas fa-search"></i>
+                <input v-model="postSearch" type="text" placeholder="Buscar posts...">
+            </div>
+
+            <div v-if="selectedBlogForPost && filteredPosts.length === 0" class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <p class="empty-state-text">Nenhum post encontrado para este blog</p>
+            </div>
+
+            <table v-if="selectedBlogForPost && filteredPosts.length > 0" class="data-table">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Categoria</th>
+                        <th>Slug</th>
+                        <th>Anúncios</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(post, index) in filteredPosts" :key="index">
+                        <td>
+                            <strong>{{ post.title }}</strong>
+                        </td>
+                        <td>
+                            <span class="badge badge-primary">
+                                <i class="fas fa-tag"></i>
+                                {{ post.category }}
+                            </span>
+                        </td>
+                        <td>
+                            <code>{{ post.slug }}</code>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">
+                                <i class="fas fa-bullhorn"></i>
+                                {{ post.ads ? post.ads.length : 0 }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-warning btn-sm" @click="editPost(index)">
+                                    <i class="fas fa-edit"></i>
+                                    Editar
+                                </button>
+                                <button class="btn btn-danger btn-sm" @click="deletePost(index)">
+                                    <i class="fas fa-trash"></i>
+                                    Excluir
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    // API Configuration
+                    apiBaseUrl: 'http://localhost:10005/api',
+
+                    // UI State
+                    activeTab: 'blogs',
+                    loading: false,
+                    saving: false,
+                    alertMessage: '',
+                    alertType: 'success',
+
+                    // Blog data
+                    blogs: [],
+                    totalBlogs: 0,
+                    currentBlog: {
+                        nome: '',
+                        categoria: '',
+                        posts: []
+                    },
+                    editingBlogId: null,
+                    blogSearch: '',
+
+                    // Post data
+                    selectedBlogForPost: '',
+                    currentPost: {
+                        title: '',
+                        slug: '',
+                        category: '',
+                        subCategory: '',
+                        imageUrl: '',
+                        excerpt: '',
+                        content: '',
+                        readTime: '',
+                        data: null,
+                        ads: []
+                    },
+                    editingPostIndex: null,
+                    postSearch: '',
+
+                    // Ad data (for posts)
+                    currentAd: {
+                        title: '',
+                        description: '',
+                        imageUrl: '',
+                        cta: ''
+                    }
+                };
+            },
+            computed: {
+                filteredBlogs() {
+                    if (!this.blogSearch) return this.blogs;
+                    const search = this.blogSearch.toLowerCase();
+                    return this.blogs.filter(blog =>
+                        blog.nome.toLowerCase().includes(search) ||
+                        blog.categoria.toLowerCase().includes(search)
+                    );
+                },
+                currentBlogPosts() {
+                    const blog = this.blogs.find(b => b.id === this.selectedBlogForPost);
+                    return blog && blog.posts ? blog.posts : [];
+                },
+                filteredPosts() {
+                    if (!this.postSearch) return this.currentBlogPosts;
+                    const search = this.postSearch.toLowerCase();
+                    return this.currentBlogPosts.filter(post =>
+                        post.title.toLowerCase().includes(search) ||
+                        post.category.toLowerCase().includes(search) ||
+                        post.slug.toLowerCase().includes(search)
+                    );
+                }
+            },
+            methods: {
+                showAlert(message, type = 'success') {
+                    this.alertMessage = message;
+                    this.alertType = type;
+                    setTimeout(() => {
+                        this.alertMessage = '';
+                    }, 4000);
+                },
+
+                changeTab(tab) {
+                    this.activeTab = tab;
+                    if (tab === 'blogs') {
+                        this.loadBlogs();
+                    }
+                },
+
+                // API Methods
+                async loadBlogs() {
+                    this.loading = true;
+                    try {
+                        const countResponse = await axios.get(`${this.apiBaseUrl}/count`);
+                        this.totalBlogs = countResponse.data;
+
+                        // Nota: Adicione um endpoint GET /api/blogs para listar todos os blogs
+                        // Por enquanto, mantemos o array existente
+                        this.showAlert('Dados carregados com sucesso!');
+                    } catch (error) {
+                        console.error('Erro ao carregar blogs:', error);
+                        this.showAlert('Erro ao carregar blogs: ' + (error.response?.data?.message || error.message), 'error');
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                async loadBlogPosts(blogName) {
+                    if (!blogName) return;
+
+                    this.loading = true;
+                    try {
+                        const response = await axios.get(`${this.apiBaseUrl}/blog/${blogName}/posts`);
+                        const posts = response.data;
+
+                        const blog = this.blogs.find(b => b.nome === blogName);
+                        if (blog) {
+                            blog.posts = posts;
+                        }
+
+                        this.showAlert('Posts carregados com sucesso!');
+                    } catch (error) {
+                        console.error('Erro ao carregar posts:', error);
+                        this.showAlert('Erro ao carregar posts: ' + (error.response?.data?.message || error.message), 'error');
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                onBlogSelect() {
+                    if (this.selectedBlogForPost) {
+                        const blog = this.blogs.find(b => b.id === this.selectedBlogForPost);
+                        if (blog && blog.nome) {
+                            this.loadBlogPosts(blog.nome);
+                        }
+                    }
+                },
+
+                // Blog methods
+                async saveBlog() {
+                    if (!this.currentBlog.nome || !this.currentBlog.categoria) {
+                        this.showAlert('Preencha todos os campos obrigatórios!', 'error');
+                        return;
+                    }
+
+                    this.saving = true;
+                    try {
+                        const blogData = {
+                            nome: this.currentBlog.nome,
+                            categoria: this.currentBlog.categoria,
+                            posts: this.currentBlog.posts || []
+                        };
+
+                        if (this.editingBlogId) {
+                            blogData.id = this.editingBlogId;
+                        }
+
+                        const response = await axios.post(`${this.apiBaseUrl}/save`, blogData);
+
+                        if (this.editingBlogId) {
+                            const index = this.blogs.findIndex(b => b.id === this.editingBlogId);
+                            this.blogs[index] = response.data;
+                            this.showAlert('Blog atualizado com sucesso!');
+                        } else {
+                            this.blogs.push(response.data);
+                            this.showAlert('Blog cadastrado com sucesso!');
+                        }
+
+                        await this.loadBlogs();
+                        this.cancelBlogEdit();
+                    } catch (error) {
+                        console.error('Erro ao salvar blog:', error);
+                        this.showAlert('Erro ao salvar blog: ' + (error.response?.data?.message || error.message), 'error');
+                    } finally {
+                        this.saving = false;
+                    }
+                },
+
+                editBlog(blog) {
+                    this.currentBlog = {
+                        nome: blog.nome,
+                        categoria: blog.categoria,
+                        posts: blog.posts || []
+                    };
+                    this.editingBlogId = blog.id;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                cancelBlogEdit() {
+                    this.currentBlog = { nome: '', categoria: '', posts: [] };
+                    this.editingBlogId = null;
+                },
+
+                // Post methods
+                async savePost() {
+                    if (!this.currentPost.title || !this.currentPost.slug ||
+                        !this.currentPost.category || !this.currentPost.content) {
+                        this.showAlert('Preencha todos os campos obrigatórios!', 'error');
+                        return;
+                    }
+
+                    const blog = this.blogs.find(b => b.id === this.selectedBlogForPost);
+                    if (!blog) {
+                        this.showAlert('Selecione um blog válido!', 'error');
+                        return;
+                    }
+
+                    this.saving = true;
+                    try {
+                        const postData = {
+                            title: this.currentPost.title,
+                            slug: this.currentPost.slug,
+                            category: this.currentPost.category,
+                            subCategory: this.currentPost.subCategory,
+                            imageUrl: this.currentPost.imageUrl,
+                            excerpt: this.currentPost.excerpt,
+                            content: this.currentPost.content,
+                            readTime: this.currentPost.readTime,
+                            data: new Date().toISOString(),
+                            ads: this.currentPost.ads || []
+                        };
+
+                        if (!blog.posts) {
+                            blog.posts = [];
+                        }
+
+                        if (this.editingPostIndex !== null) {
+                            blog.posts[this.editingPostIndex] = postData;
+                        } else {
+                            blog.posts.push(postData);
+                        }
+
+                        await axios.post(`${this.apiBaseUrl}/save`, blog);
+
+                        this.showAlert(this.editingPostIndex !== null ?
+                            'Post atualizado com sucesso!' : 'Post cadastrado com sucesso!');
+
+                        await this.loadBlogPosts(blog.nome);
+                        this.cancelPostEdit();
+                    } catch (error) {
+                        console.error('Erro ao salvar post:', error);
+                        this.showAlert('Erro ao salvar post: ' + (error.response?.data?.message || error.message), 'error');
+                    } finally {
+                        this.saving = false;
+                    }
+                },
+
+                editPost(index) {
+                    const blog = this.blogs.find(b => b.id === this.selectedBlogForPost);
+                    this.currentPost = { ...blog.posts[index] };
+                    this.editingPostIndex = index;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                async deletePost(index) {
+                    if (!confirm('Tem certeza que deseja excluir este post?')) return;
+
+                    const blog = this.blogs.find(b => b.id === this.selectedBlogForPost);
+
+                    this.saving = true;
+                    try {
+                        blog.posts.splice(index, 1);
+                        await axios.post(`${this.apiBaseUrl}/save`, blog);
+                        this.showAlert('Post excluído com sucesso!');
+                        await this.loadBlogPosts(blog.nome);
+                    } catch (error) {
+                        console.error('Erro ao excluir post:', error);
+                        this.showAlert('Erro ao excluir post: ' + (error.response?.data?.message || error.message), 'error');
+                    } finally {
+                        this.saving = false;
+                    }
+                },
+
+                cancelPostEdit() {
+                    this.currentPost = {
+                        title: '',
+                        slug: '',
+                        category: '',
+                        subCategory: '',
+                        imageUrl: '',
+                        excerpt: '',
+                        content: '',
+                        readTime: '',
+                        data: null,
+                        ads: []
+                    };
+                    this.editingPostIndex = null;
+                },
+
+                // Ad methods (for posts)
+                addAdToPost() {
+                    if (!this.currentAd.title || !this.currentAd.description) {
+                        this.showAlert('Preencha título e descrição do anúncio!', 'error');
+                        return;
+                    }
+
+                    if (!this.currentPost.ads) {
+                        this.currentPost.ads = [];
+                    }
+
+                    this.currentPost.ads.push({ ...this.currentAd });
+                    this.currentAd = { title: '', description: '', imageUrl: '', cta: '' };
+                    this.showAlert('Anúncio adicionado ao post!');
+                },
+
+                removeAdFromPost(index) {
+                    this.currentPost.ads.splice(index, 1);
+                    this.showAlert('Anúncio removido!');
+                }
+            },
+            mounted() {
+                this.loadBlogs();
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

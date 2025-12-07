@@ -5,10 +5,10 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Blog LumiCode - Insights, tutoriais e novidades sobre desenvolvimento web, tecnologia e transformação digital.">
-    <meta name="keywords" content="Blog, Tecnologia, Desenvolvimento Web, Tutoriais, LumiCode">
+        content="Blog LumiCode - Conteúdo técnico, insights estratégicos e tendências para impulsionar seus projetos digitais.">
+    <meta name="keywords" content="Blog, Tecnologia, Desenvolvimento Web, Tutoriais, LumiCode, Inovação Digital">
     <meta name="author" content="LumiCode">
-    <title>Blog - LumiCode</title>
+    <title>Blog - LumiCode | Tecnologia e Desenvolvimento Web</title>
     <link rel='stylesheet' type='text/css' href='css/style.css'>
     <script src="js/tailwindcss.js"></script>
     <link href="css/fonts.css" rel="stylesheet">
@@ -28,11 +28,11 @@
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
     <style>
-        /* CSS Complementar para o Blog */
+        /* CSS Completo do Blog */
         .blog-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem 2rem 3rem;
             display: grid;
             grid-template-columns: 1fr 350px;
             gap: 3rem;
@@ -47,97 +47,98 @@
             grid-column: 1 / -1;
         }
 
-        /* Hero do Blog */
+        /* Hero Melhorado */
         .blog-hero {
-            background: rgba(19, 19, 21, 0.9);
+            background: linear-gradient(135deg, rgba(15, 15, 17, 0.95) 0%, rgba(25, 25, 28, 0.95) 100%);
             border: 2px solid var(--verde);
             border-radius: 24px;
-            padding: 4rem 3rem;
-            margin: 3rem 0;
+            padding: 5rem 4rem;
+            margin-bottom: 4rem;
             color: white;
-            box-shadow: 0 0 40px rgba(96, 244, 123, 0.2);
+            box-shadow: 0 8px 32px rgba(96, 244, 123, 0.15);
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(96, 244, 123, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(96, 244, 123, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
         }
 
         .blog-hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             color: var(--verde);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .blog-hero p {
-            font-size: 1.25rem;
-            opacity: 0.95;
+            font-size: 1.35rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
         }
 
-        /* Filtros */
-        .blog-filters {
-            margin-bottom: 3rem;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .filter-chip {
-            padding: 0.75rem 1.5rem;
-            background: rgba(19, 19, 21, 0.8);
-            border: 2px solid #2a2a2a;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            color: #cbd5e1;
-            display: flex;
+        .blog-hero-badge {
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .filter-chip:hover {
-            transform: translateY(-2px);
-            border-color: var(--verde);
-        }
-
-        .filter-chip.active {
-            background: var(--verde);
-            color: #000000;
-            border-color: var(--verde);
-        }
-
-        .filter-chip .count {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.1rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            background: rgba(96, 244, 123, 0.15);
+            border: 1px solid rgba(96, 244, 123, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--verde);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
         /* Grid de Posts */
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .post-card {
-            background: rgba(19, 19, 21, 0.9);
+            background: rgba(19, 19, 21, 0.8);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             color: white;
             display: flex;
             flex-direction: column;
             border: 1px solid #2a2a2a;
+            height: 100%;
         }
 
         .post-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(96, 244, 123, 0.3);
+            box-shadow: 0 12px 40px rgba(96, 244, 123, 0.25);
             border-color: var(--verde);
         }
 
         .post-header {
-            height: 200px;
+            height: 220px;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             position: relative;
             border-bottom: 2px solid var(--verde);
@@ -145,38 +146,60 @@
             background-position: center;
         }
 
+        .post-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(19, 19, 21, 0.7), transparent);
+        }
+
         .category-badge {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.25rem;
+            right: 1.25rem;
             background: var(--verde);
             color: #000000;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.1rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             z-index: 2;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
         .post-body {
-            padding: 1.75rem;
+            padding: 2rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .post-body h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
             font-weight: 700;
+            line-height: 1.3;
+            color: #ffffff;
         }
 
         .post-meta {
             display: flex;
-            gap: 1rem;
+            gap: 1.25rem;
             color: #94a3b8;
             font-size: 0.875rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .post-excerpt {
@@ -184,89 +207,107 @@
             line-height: 1.7;
             margin-bottom: 1.5rem;
             flex: 1;
+            font-size: 0.975rem;
         }
 
         .read-more {
             color: var(--verde);
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            transition: gap 0.3s ease;
+        }
+
+        .post-card:hover .read-more {
+            gap: 1rem;
         }
 
         .read-more::after {
             content: '→';
+            font-size: 1.2rem;
         }
 
         /* Post Individual */
         .post-single {
-            background: rgba(19, 19, 21, 0.9);
+            background: rgba(19, 19, 21, 0.8);
             border-radius: 24px;
-            padding: 4rem;
+            padding: 4.5rem;
             border: 1px solid #2a2a2a;
             color: white;
         }
 
         .post-single h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 3.25rem;
+            margin-bottom: 1.75rem;
             color: var(--verde);
+            font-weight: 800;
+            line-height: 1.2;
         }
 
         .post-content {
-            font-size: 1.125rem;
+            font-size: 1.15rem;
             line-height: 1.9;
-            color: #cbd5e1;
+            color: #e2e8f0;
         }
 
         .post-content p {
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
         }
 
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
             color: var(--verde);
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.75rem;
             background: rgba(19, 19, 21, 0.8);
             border-radius: 50px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            border: 2px solid #2a2a2a;
+            font-weight: 600;
         }
 
         .back-link:hover {
             background: var(--verde);
             color: #000000;
+            border-color: var(--verde);
+            transform: translateX(-4px);
         }
 
         .back-link::before {
             content: '←';
-            margin-right: 0.5rem;
+            font-size: 1.2rem;
         }
 
         /* Sidebar */
         .blog-sidebar {
             position: sticky;
-            top: 115px;
+            top: 130px;
             align-self: flex-start;
         }
 
         .blog-sidebar h3 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
             color: var(--verde);
-            font-size: 1.25rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
         .ad-card {
-            background: rgba(19, 19, 21, 0.9);
-            border-radius: 16px;
+            background: rgba(19, 19, 21, 0.8);
+            border-radius: 18px;
             overflow: hidden;
             border: 2px solid #2a2a2a;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
             text-decoration: none;
             color: white;
             display: block;
@@ -275,6 +316,7 @@
         .ad-card:hover {
             transform: translateY(-4px);
             border-color: var(--verde);
+            box-shadow: 0 8px 24px rgba(96, 244, 123, 0.2);
         }
 
         .ad-image {
@@ -284,122 +326,60 @@
         }
 
         .ad-content {
-            padding: 1.25rem;
+            padding: 1.5rem;
         }
 
         .ad-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.65rem;
+            line-height: 1.4;
         }
 
         .ad-description {
             color: #cbd5e1;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.925rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
         }
 
         .ad-cta {
             background: var(--verde);
             color: #000000;
-            padding: 0.6rem 1.25rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             display: inline-block;
+            transition: all 0.3s ease;
         }
 
-        /* Paginação */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
+        .ad-card:hover .ad-cta {
+            transform: scale(1.05);
         }
 
-        .pagination-button {
-            min-width: 44px;
-            height: 44px;
-            padding: 0.75rem 1rem;
-            background: rgba(19, 19, 21, 0.8);
-            border: 2px solid #2a2a2a;
-            border-radius: 12px;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .pagination-button:hover:not(:disabled) {
-            border-color: var(--verde);
-            color: var(--verde);
-        }
-
-        .pagination-button.active {
-            background: var(--verde);
-            color: #000000;
-        }
-
-        .pagination-button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        /* Formulário */
-        .form-container {
-            background: rgba(19, 19, 21, 0.9);
-            border-radius: 24px;
-            padding: 3rem;
-            border: 1px solid #2a2a2a;
-            color: white;
-        }
-
-        .form-container h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--verde);
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            border: 2px solid #2a2a2a;
-            border-radius: 12px;
-            font-size: 1rem;
-            background: rgba(26, 26, 26, 0.8);
-            color: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--verde);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        /* Loading */
+        /* Loading & Empty States */
         .loading {
             text-align: center;
-            padding: 4rem;
+            padding: 5rem 2rem;
             color: #cbd5e1;
+        }
+
+        .loading i {
+            font-size: 3rem;
+            color: var(--verde);
+            margin-bottom: 1.5rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .empty-state {
@@ -408,10 +388,35 @@
             color: #cbd5e1;
         }
 
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--verde);
+            opacity: 0.5;
+            margin-bottom: 2rem;
+        }
+
         .empty-state h2 {
             color: var(--verde);
-            font-size: 2rem;
+            font-size: 2.25rem;
             margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Google AdSense Container */
+        .adsense-container {
+            margin: 2rem 0;
+            min-height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(19, 19, 21, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
         }
 
         /* Responsivo */
@@ -427,147 +432,34 @@
 
         @media (max-width: 768px) {
             .blog-container {
-                padding: 2rem 1rem;
-                margin-top: 80px;
+                padding: 2rem 1rem 3rem;
+                margin-top: 90px;
             }
 
             .blog-hero {
-                padding: 3rem 2rem;
+                padding: 3.5rem 2rem;
+                margin-bottom: 3rem;
             }
 
             .blog-hero h1 {
                 font-size: 2.5rem;
             }
 
+            .blog-hero p {
+                font-size: 1.15rem;
+            }
+
             .posts-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .post-single {
-                padding: 2.5rem 1.5rem;
+                padding: 2.5rem 1.75rem;
             }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Google AdSense Container */
-        .adsense-container {
-            margin: 2rem 0;
-            min-height: 320px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(19, 19, 21, 0.5);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #2a2a2a;
-        }
-
-        /* Banner horizontal de anúncios */
-        .ad-banner-horizontal {
-            background: rgba(19, 19, 21, 0.9);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid #2a2a2a;
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: row;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-        }
-
-        .ad-banner-horizontal:hover {
-            border-color: var(--verde);
-            box-shadow: 0 0 30px rgba(96, 244, 123, 0.2);
-        }
-
-        .ad-banner-horizontal .ad-image {
-            width: 400px;
-            height: 200px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .ad-banner-horizontal .ad-content {
-            flex: 1;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .ad-banner-horizontal .ad-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .ad-banner-horizontal .ad-description {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Seção de gerenciamento de anúncios */
-        .ads-management {
-            margin-top: 3rem;
-        }
-
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .ad-card-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .btn-edit {
-            background: var(--verde);
-            color: #000000;
-        }
-
-        .btn-edit:hover {
-            opacity: 0.8;
-        }
-
-        .btn-delete {
-            background: #ef4444;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #dc2626;
-        }
-
-        @media (max-width: 768px) {
-            .ad-banner-horizontal {
-                flex-direction: column;
-            }
-
-            .ad-banner-horizontal .ad-image {
-                width: 100%;
-                height: 200px;
-            }
-
-            .ads-grid {
-                grid-template-columns: 1fr;
+            .post-single h1 {
+                font-size: 2.25rem;
             }
         }
     </style>
@@ -575,7 +467,8 @@
 
 <body>
     <div id="app">
-        <!-- Header igual ao site principal -->
+        <!-- Header -->
+        <br /><br />
         <div class="background-verde">
             <header>
                 <div class="container">
@@ -583,20 +476,12 @@
                         <a href="index.html">
                             <div class="logo">
                                 <div>
-                                    <img class="logo-name" src="img/logo-escrito.svg" />
+                                    <img class="logo-name" src="img/logo-escrito.svg" alt="LumiCode" />
                                 </div>
                             </div>
                         </a>
                         <ul class="menu">
-                            <!-- <li><router-link to="/">blog</router-link></li>
-                            <li><router-link to="/novo-post">Publicar</router-link></li>
-                            <li><router-link to="/anuncios">Anúncios</router-link></li>
-                            <li><router-link to="/novo-anuncio">Novo Anúncio</router-link></li> -->
                             <li><a href="index.html">Home</a></li>
-                            <!-- <li><a href="index.html#etapas">Etapas</a></li>
-                            <li><a href="index.html#prioridades">Prioridades</a></li>
-                            <li><a href="index.html#caracteristicas">Características</a></li>
-                            <li><a href="index.html#sobre">Sobre</a></li> -->
                             <li><a href="index.html#contato"><button class="btn-gradient">Contate-nos</button></a></li>
                         </ul>
                         <div class="menu-icon" onclick="toggleMenu()">
@@ -616,23 +501,8 @@
             <aside v-if="showSidebar" class="blog-sidebar">
                 <h3><i class="fas fa-bullhorn"></i> Anúncios</h3>
 
-                <!-- Google AdSense na página principal -->
                 <template v-if="isHomePage">
-                    <div class="adsense-container" style="margin: 0 0 1.5rem 0;">
-                        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-6974524299465436"
-                            data-ad-slot="6752427405" data-auto-format="rspv" data-full-width="">
-                            <div overflow=""></div>
-                        </amp-ad>
-                    </div>
-
-                    <div class="adsense-container" style="margin: 1.5rem 0;">
-                        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-6974524299465436"
-                            data-ad-slot="6752427405" data-auto-format="rspv" data-full-width="">
-                            <div overflow=""></div>
-                        </amp-ad>
-                    </div>
-
-                    <div class="adsense-container" style="margin: 1.5rem 0;">
+                    <div class="adsense-container" v-for="i in 3" style="margin: 0 0 1.5rem 0;">
                         <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-6974524299465436"
                             data-ad-slot="6752427405" data-auto-format="rspv" data-full-width="">
                             <div overflow=""></div>
@@ -640,7 +510,6 @@
                     </div>
                 </template>
 
-                <!-- Anúncios personalizados nas páginas de posts -->
                 <template v-else>
                     <a v-for="ad in sidebarAds" :key="ad.id" :href="ad.url" target="_blank" class="ad-card">
                         <img v-if="ad.imageUrl" :src="ad.imageUrl" :alt="ad.title" class="ad-image">
@@ -650,20 +519,23 @@
                             <span class="ad-cta">{{ ad.cta || 'Saiba Mais' }}</span>
                         </div>
                     </a>
-                    <div v-if="sidebarAds.length === 0" style="color: #cbd5e1; text-align: center; padding: 2rem;">
+                    <div v-if="sidebarAds.length === 0"
+                        style="color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"
+                            style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block; opacity: 0.5;"></i>
                         <p>Nenhum anúncio disponível</p>
                     </div>
                 </template>
             </aside>
         </div>
 
-        <!-- Footer igual ao site principal -->
+        <!-- Footer -->
         <footer class="text-gray-800 py-12" style="background: var(--color-grad)">
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h2 class="text-2xl font-bold sub-title">LumiCode</h2>
-                    <p style="color: white" class="mt-2 max-w-sm">Ajudamos você a superar os desafios dos projetos de
-                        software com agilidade e previsibilidade.</p>
+                    <p style="color: white" class="mt-2 max-w-sm">Conectamos ideias à tecnologia, criando soluções
+                        digitais que transformam negócios.</p>
                 </div>
                 <div style="color: white">
                     <h3 class="text-lg font-bold">Sobre</h3>
@@ -676,21 +548,18 @@
                 <div style="color: white">
                     <h3 class="text-lg font-bold">Contato</h3>
                     <p class="mt-2">RUA JAMES ENSOR, PARQUE REGINA 119 - São Paulo, SP</p>
-                    <p class="mt-1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                            data-cfemail="6c0f0302180d18032c001901050f030809420f0301420e1e">[email&#160;protected]</a>
-                    </p>
-                    <p class="mt-1">(21) 97665-7698</p>
+                    <p class="mt-1">contato@lumicode.com</p>
+                    <p class="mt-1">(11) 94957-7030</p>
                 </div>
             </div>
         </footer>
 
-        <a href="https://wa.me/+5521976657698" class="whatsapp-button" target="_blank">
-            <img width="45" src="img/WhatsApp.svg" alt="">
+        <a href="https://wa.me/+5511949577030" class="whatsapp-button" target="_blank">
+            <img width="45" src="img/WhatsApp.svg" alt="WhatsApp">
         </a>
     </div>
 
     <script>
-        // Toggle menu mobile (específico do blog)
         function toggleMenu() {
             const menu = document.querySelector('.menu');
             if (menu) {
@@ -700,6 +569,9 @@
 
         const { createApp } = Vue;
         const { createRouter, createWebHashHistory } = VueRouter;
+
+        // Configuração da API
+        const API_BASE_URL = 'http://localhost:10005/api/blog/lumicode';
 
         // Categorias
         const CATEGORIES = {
@@ -712,16 +584,14 @@
 
         // Utilitários
         const utils = {
-            generateSlug(title) {
-                return title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                    .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim();
-            },
             formatDate(dateString) {
+                if (!dateString) return '';
                 return new Date(dateString).toLocaleDateString('pt-BR', {
                     year: 'numeric', month: 'long', day: 'numeric'
                 });
             },
             isPublished(publishDate) {
+                if (!publishDate) return false;
                 return new Date(publishDate) <= new Date();
             },
             getCategoryInfo(categoryKey) {
@@ -729,101 +599,72 @@
             }
         };
 
-        // Store de dados
+        // Store com integração API
         const store = {
-            posts: [
-                {
-                    id: 1,
-                    title: 'Guia Completo de Vue.js 3 para Iniciantes',
-                    slug: 'guia-completo-vuejs-3-iniciantes',
-                    category: 'desenvolvimento',
-                    imageUrl: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop',
-                    excerpt: 'Aprenda Vue.js 3 do zero com este guia completo.',
-                    content: 'Vue.js 3 revolucionou o desenvolvimento web com sua API de Composição.\n\nA API de Composição oferece uma forma mais flexível de organizar a lógica dos componentes.\n\nVamos aprender sobre refs, reactive, computed properties e watchers.',
-                    publishDate: '2024-11-15',
-                    readTime: 8
-                },
-                {
-                    id: 2,
-                    title: 'CSS Grid: Criando Layouts Modernos',
-                    slug: 'css-grid-layouts-modernos',
-                    category: 'design',
-                    imageUrl: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop',
-                    excerpt: 'Domine CSS Grid e crie layouts complexos e responsivos.',
-                    content: 'CSS Grid é uma ferramenta poderosa que revolucionou a forma como criamos layouts.\n\nNeste tutorial, exploramos desde os conceitos básicos até técnicas avançadas.\n\nDescubra como combinar Grid com Flexbox para criar interfaces profissionais.',
-                    publishDate: '2024-11-20',
-                    readTime: 12
-                },
-                {
-                    id: 3,
-                    title: 'As Novidades do JavaScript ES2024',
-                    slug: 'novidades-javascript-es2024',
-                    category: 'tecnologia',
-                    imageUrl: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&h=400&fit=crop',
-                    excerpt: 'Explore as mais recentes funcionalidades do JavaScript ES2024.',
-                    content: 'O JavaScript continua evoluindo rapidamente.\n\nEntre as novidades destacam-se novos métodos para manipulação de arrays.\n\nVamos explorar cada uma dessas features com exemplos práticos.',
-                    publishDate: '2024-11-25',
-                    readTime: 10
-                }
-            ],
-            ads: [
-                {
-                    id: 1,
-                    title: 'Curso Completo de Vue.js',
-                    description: 'Aprenda Vue.js do zero ao avançado com 50% de desconto!',
-                    imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop',
-                    url: 'https://exemplo.com/curso-vue',
-                    cta: 'Inscreva-se',
-                    active: true
-                },
-                {
-                    id: 2,
-                    title: 'Ferramenta de Design UI/UX',
-                    description: 'Crie interfaces incríveis com nossa ferramenta profissional.',
-                    imageUrl: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
-                    url: 'https://exemplo.com/ferramenta-design',
-                    cta: 'Teste Grátis',
-                    active: true
-                },
-                {
-                    id: 3,
-                    title: 'Hosting Premium',
-                    description: 'Hospedagem rápida e segura para seu projeto.',
-                    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop',
-                    url: 'https://exemplo.com/hosting',
-                    cta: 'Ver Planos',
-                    active: true
-                }
-            ],
-            addPost(post) {
-                const newPost = {
-                    id: this.posts.length + 1,
-                    readTime: Math.ceil(post.content.split(' ').length / 200),
-                    ...post
-                };
-                this.posts.push(newPost);
-                return newPost;
-            },
-            getPostBySlug(slug) {
-                return this.posts.find(p => p.slug === slug);
-            },
-            addAd(ad) {
-                const newAd = {
-                    id: this.ads.length + 1,
-                    active: true,
-                    ...ad
-                };
-                this.ads.push(newAd);
-                return newAd;
-            },
-            deleteAd(id) {
-                const index = this.ads.findIndex(ad => ad.id === id);
-                if (index !== -1) {
-                    this.ads.splice(index, 1);
+            posts: [],
+            header: null,
+
+            // Buscar todos os posts
+            async loadPosts() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/posts`);
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+                    this.posts = await response.json();
+                    return this.posts;
+                } catch (error) {
+                    console.error('Erro ao carregar posts:', error);
+                    return [];
                 }
             },
-            getActiveAds() {
-                return this.ads.filter(ad => ad.active);
+
+            // Buscar post por slug
+            async getPostBySlug(slug) {
+                try {
+                    // Primeiro tenta buscar nos posts já carregados
+                    let post = this.posts.find(p => p.slug === slug);
+
+                    // Se não encontrou, faz requisição específica
+                    if (!post) {
+                        const response = await fetch(`${API_BASE_URL}/posts/${slug}`);
+                        if (!response.ok) {
+                            throw new Error('Post não encontrado');
+                        }
+                        post = await response.json();
+                    }
+
+                    return post;
+                } catch (error) {
+                    console.error('Erro ao buscar post:', error);
+                    return null;
+                }
+            },
+
+            // Buscar header do blog
+            async loadHeader() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/header`);
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar header');
+                    }
+                    this.header = await response.json();
+                    return this.header;
+                } catch (error) {
+                    console.error('Erro ao carregar header:', error);
+                    // Retorna header padrão em caso de erro
+                    return {
+                        title: 'Blog LumiCode',
+                        description: 'Conteúdo técnico, insights estratégicos e tendências para impulsionar seus projetos digitais.',
+                        imageUrl: ''
+                    };
+                }
+            },
+
+            // Buscar anúncios ativos
+            getActiveAds(post) {
+                if (!post || !post.ads) return [];
+                return post.ads.filter(ad => ad.active === 'true' || ad.active === true);
             }
         };
 
@@ -831,23 +672,20 @@
         const Home = {
             template: `
                 <div>
-                    <div class="blog-hero">
-                        <h1>Blog LumiCode</h1>
-                        <p>Insights, tutoriais e novidades sobre desenvolvimento web e tecnologia</p>
-                    </div>
-                    
-                    <div class="blog-filters">
-                        <button class="filter-chip" :class="{ active: selectedCategory === 'todos' }" @click="filterByCategory('todos')">
-                            <i class="fas fa-th"></i><span>Todos</span>
-                        </button>
-                        <button v-for="(cat, key) in categories" :key="key" class="filter-chip"
-                            :class="{ active: selectedCategory === key }" @click="filterByCategory(key)">
-                            <i :class="cat.icon"></i><span>{{ cat.label }}</span>
-                        </button>
+                    <div class="blog-hero" :style="headerStyle">
+                        <div class="blog-hero-content">
+                            <span class="blog-hero-badge">
+                                <i class="fas fa-star"></i>
+                                Conteúdo Exclusivo
+                            </span>
+                            <h1>{{ header.title }}</h1>
+                            <p>{{ header.description }}</p>
+                        </div>
                     </div>
                     
                     <div v-if="loading" class="loading">
-                        <p>Carregando posts...</p>
+                        <i class="fas fa-spinner"></i>
+                        <p style="margin-top: 1rem; font-size: 1.1rem;">Carregando posts...</p>
                     </div>
                     
                     <div v-else-if="filteredPosts.length > 0" class="posts-grid">
@@ -868,38 +706,64 @@
                     </div>
                     
                     <div v-else class="empty-state">
+                        <i class="fas fa-file-alt"></i>
                         <h2>Nenhum post encontrado</h2>
-                        <p>Não há posts publicados nesta categoria ainda.</p>
+                        <p>Não há posts publicados ainda. Volte em breve!</p>
                     </div>
                 </div>
             `,
             data() {
                 return {
-                    selectedCategory: 'todos',
                     filteredPosts: [],
-                    categories: CATEGORIES,
-                    loading: false
+                    loading: false,
+                    header: {
+                        title: 'Blog LumiCode',
+                        description: 'Conteúdo técnico, insights estratégicos e tendências para impulsionar seus projetos digitais.',
+                        imageUrl: ''
+                    }
                 };
+            },
+            computed: {
+                headerStyle() {
+                    if (this.header.imageUrl) {
+                        return {
+                            backgroundImage: `linear-gradient(135deg, rgba(15,15,17,0.92) 0%, rgba(25,25,28,0.85) 100%), url(${this.header.imageUrl})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        };
+                    }
+                    return {};
+                }
             },
             methods: {
                 formatDate: utils.formatDate,
-                getCategoryLabel(key) { return utils.getCategoryInfo(key).label; },
-                loadPosts() {
-                    this.loading = true;
-                    let posts = store.posts.filter(p => utils.isPublished(p.publishDate));
-                    if (this.selectedCategory !== 'todos') {
-                        posts = posts.filter(p => p.category === this.selectedCategory);
-                    }
-                    this.filteredPosts = posts.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
-                    this.loading = false;
+                getCategoryLabel(key) {
+                    return utils.getCategoryInfo(key).label;
                 },
-                filterByCategory(category) {
-                    this.selectedCategory = category;
-                    this.loadPosts();
+                async loadPosts() {
+                    this.loading = true;
+                    try {
+                        const posts = await store.loadPosts();
+                        this.filteredPosts = posts
+                            .filter(p => utils.isPublished(p.publishDate))
+                            .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+                    } catch (error) {
+                        console.error('Erro ao carregar posts:', error);
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+                async loadHeader() {
+                    try {
+                        this.header = await store.loadHeader();
+                    } catch (error) {
+                        console.error('Erro ao carregar header:', error);
+                    }
                 }
             },
-            created() {
-                this.loadPosts();
+            async created() {
+                await this.loadHeader();
+                await this.loadPosts();
             }
         };
 
@@ -908,11 +772,18 @@
             template: `
                 <div>
                     <router-link to="/" class="back-link">Voltar para o blog</router-link>
-                    <article v-if="post" class="post-single">
-                        <img v-if="post.imageUrl" :src="post.imageUrl" :alt="post.title" style="width:100%; max-height:500px; object-fit:cover; border-radius:16px; margin-bottom:3rem;">
+                    
+                    <div v-if="loading" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p style="margin-top: 1rem;">Carregando post...</p>
+                    </div>
+                    
+                    <article v-else-if="post" class="post-single">
+                        <img v-if="post.imageUrl" :src="post.imageUrl" :alt="post.title" 
+                             style="width:100%; max-height:500px; object-fit:cover; border-radius:16px; margin-bottom:3rem;">
                         <span class="category-badge">{{ getCategoryInfo(post.category).label }}</span>
                         <h1>{{ post.title }}</h1>
-                        <div class="post-meta" style="margin-bottom:2rem;">
+                        <div class="post-meta" style="margin-bottom:2.5rem;">
                             <span><i class="far fa-calendar"></i> {{ formatDate(post.publishDate) }}</span>
                             <span><i class="far fa-clock"></i> {{ post.readTime }} min de leitura</span>
                         </div>
@@ -920,9 +791,23 @@
                             <p v-for="(p, i) in contentParagraphs" :key="i">{{ p }}</p>
                         </div>
                     </article>
+                    
+                    <div v-else class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h2>Post não encontrado</h2>
+                        <p>O post que você procura não existe ou foi removido.</p>
+                        <router-link to="/" class="btn-gradient" style="margin-top: 2rem; display: inline-block; padding: 1rem 2rem; text-decoration: none;">
+                            Voltar ao blog
+                        </router-link>
+                    </div>
                 </div>
             `,
-            data() { return { post: null }; },
+            data() {
+                return {
+                    post: null,
+                    loading: false
+                };
+            },
             computed: {
                 contentParagraphs() {
                     return this.post?.content?.split('\n\n').filter(p => p.trim()) || [];
@@ -930,216 +815,29 @@
             },
             methods: {
                 formatDate: utils.formatDate,
-                getCategoryInfo: utils.getCategoryInfo
-            },
-            created() {
-                this.post = store.getPostBySlug(this.$route.params.slug);
-            }
-        };
+                getCategoryInfo: utils.getCategoryInfo,
+                async loadPost() {
+                    this.loading = true;
+                    try {
+                        this.post = await store.getPostBySlug(this.$route.params.slug);
 
-        // Componente NewAd
-        const NewAd = {
-            template: `
-                <div class="form-container">
-                    <h1>Cadastrar Novo Anúncio</h1>
-                    <p style="color:#cbd5e1; margin-bottom:2.5rem;">Adicione um novo anúncio personalizado</p>
-                    
-                    <div v-if="successMessage" style="background:#d1fae5; color:#065f46; padding:1rem; border-radius:12px; margin-bottom:2rem;">
-                        {{ successMessage }}
-                    </div>
-                    
-                    <form @submit.prevent="handleSubmit">
-                        <div class="form-group">
-                            <label>Título *</label>
-                            <input v-model="form.title" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Descrição *</label>
-                            <textarea v-model="form.description" rows="3" required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>URL da Imagem *</label>
-                            <input type="url" v-model="form.imageUrl" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>URL de Destino *</label>
-                            <input type="url" v-model="form.url" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Texto do Botão</label>
-                            <input v-model="form.cta" placeholder="Saiba Mais">
-                        </div>
-                        
-                        <button type="submit" class="btn-gradient" :disabled="submitting">
-                            {{ submitting ? 'Cadastrando...' : 'Cadastrar Anúncio' }}
-                        </button>
-                    </form>
-                </div>
-            `,
-            data() {
-                return {
-                    form: { title: '', description: '', imageUrl: '', url: '', cta: 'Saiba Mais' },
-                    submitting: false,
-                    successMessage: ''
-                };
-            },
-            methods: {
-                handleSubmit() {
-                    this.submitting = true;
-                    store.addAd({ ...this.form });
-                    this.successMessage = 'Anúncio cadastrado com sucesso! 🎉';
-                    this.form = { title: '', description: '', imageUrl: '', url: '', cta: 'Saiba Mais' };
-                    this.submitting = false;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
-        };
-
-        // Componente ManageAds
-        const ManageAds = {
-            template: `
-                <div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-                        <div>
-                            <h1 style="font-size:2.5rem; font-weight:800; color:var(--verde); margin-bottom:0.5rem;">Gerenciar Anúncios</h1>
-                            <p style="color:#cbd5e1;">Total: {{ ads.length }} anúncios</p>
-                        </div>
-                        <router-link to="/novo-anuncio" class="btn-gradient">
-                            <i class="fas fa-plus-circle"></i> Novo Anúncio
-                        </router-link>
-                    </div>
-                    
-                    <div v-if="ads.length > 0" class="ads-grid">
-                        <div v-for="ad in ads" :key="ad.id" class="ad-card" style="cursor:default;">
-                            <img v-if="ad.imageUrl" :src="ad.imageUrl" :alt="ad.title" class="ad-image">
-                            <div class="ad-content">
-                                <div class="ad-title">{{ ad.title }}</div>
-                                <div class="ad-description">{{ ad.description }}</div>
-                                <div style="margin:0.5rem 0; font-size:0.85rem; color:#94a3b8;">
-                                    <i class="fas fa-link"></i> {{ ad.url }}
-                                </div>
-                                <div class="ad-card-actions">
-                                    <button @click="deleteAd(ad.id)" class="btn-small btn-delete">
-                                        <i class="fas fa-trash"></i> Excluir
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div v-else class="empty-state">
-                        <div style="font-size:5rem; opacity:0.5; margin-bottom:1.5rem;">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <h2>Nenhum anúncio cadastrado</h2>
-                        <p>Comece criando seu primeiro anúncio personalizado</p>
-                        <router-link to="/novo-anuncio" class="btn-gradient" style="margin-top:2rem; display:inline-flex;">
-                            <i class="fas fa-plus-circle"></i> Cadastrar Primeiro Anúncio
-                        </router-link>
-                    </div>
-                </div>
-            `,
-            data() {
-                return { ads: [] };
-            },
-            methods: {
-                loadAds() {
-                    this.ads = store.ads;
-                },
-                deleteAd(id) {
-                    if (confirm('Tem certeza que deseja excluir este anúncio?')) {
-                        store.deleteAd(id);
-                        this.loadAds();
+                        // Emitir evento para atualizar anúncios da sidebar
+                        this.$root.$emit('post-loaded', this.post);
+                    } catch (error) {
+                        console.error('Erro ao carregar post:', error);
+                    } finally {
+                        this.loading = false;
                     }
                 }
             },
-            created() {
-                this.loadAds();
-            }
-        };
-
-        // Componente NewPost
-        const NewPost = {
-            template: `
-                <div class="form-container">
-                    <h1>Publicar Novo Post</h1>
-                    <p style="color:#cbd5e1; margin-bottom:2.5rem;">Compartilhe seus conhecimentos</p>
-                    
-                    <div v-if="successMessage" style="background:#d1fae5; color:#065f46; padding:1rem; border-radius:12px; margin-bottom:2rem;">
-                        {{ successMessage }}
-                    </div>
-                    
-                    <form @submit.prevent="handleSubmit">
-                        <div class="form-group">
-                            <label>Título *</label>
-                            <input v-model="form.title" @input="onTitleChange" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>URL da Imagem</label>
-                            <input type="url" v-model="form.imageUrl">
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Slug *</label>
-                                <input v-model="form.slug" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Categoria *</label>
-                                <select v-model="form.category" required>
-                                    <option value="">Selecione</option>
-                                    <option v-for="(cat, key) in categories" :key="key" :value="key">{{ cat.label }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Resumo *</label>
-                            <textarea v-model="form.excerpt" rows="3" required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Conteúdo *</label>
-                            <textarea v-model="form.content" rows="12" required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Data de Publicação *</label>
-                            <input type="date" v-model="form.publishDate" required>
-                        </div>
-                        
-                        <button type="submit" class="btn-gradient" :disabled="submitting">
-                            {{ submitting ? 'Publicando...' : 'Publicar Post' }}
-                        </button>
-                    </form>
-                </div>
-            `,
-            data() {
-                return {
-                    form: { title: '', slug: '', imageUrl: '', category: '', excerpt: '', content: '', publishDate: new Date().toISOString().split('T')[0] },
-                    categories: CATEGORIES,
-                    submitting: false,
-                    successMessage: ''
-                };
+            async created() {
+                await this.loadPost();
             },
-            methods: {
-                onTitleChange() {
-                    if (!this.form.slug) {
-                        this.form.slug = utils.generateSlug(this.form.title);
+            watch: {
+                '$route.params.slug': {
+                    handler() {
+                        this.loadPost();
                     }
-                },
-                handleSubmit() {
-                    this.submitting = true;
-                    store.addPost({ ...this.form });
-                    this.successMessage = 'Post publicado com sucesso! 🎉';
-                    this.form = { title: '', slug: '', imageUrl: '', category: '', excerpt: '', content: '', publishDate: new Date().toISOString().split('T')[0] };
-                    this.submitting = false;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }
         };
@@ -1147,10 +845,7 @@
         // Rotas
         const routes = [
             { path: '/', component: Home },
-            { path: '/post/:slug', component: PostSingle },
-            { path: '/novo-post', component: NewPost },
-            { path: '/anuncios', component: ManageAds },
-            { path: '/novo-anuncio', component: NewAd }
+            { path: '/post/:slug', component: PostSingle }
         ];
 
         const router = createRouter({
@@ -1161,7 +856,7 @@
             }
         });
 
-        // App
+        // App Principal
         const app = createApp({
             data() {
                 return {
@@ -1177,12 +872,29 @@
                 }
             },
             methods: {
-                loadSidebarAds() {
-                    this.sidebarAds = store.ads.filter(ad => ad.active);
+                async loadSidebarAds() {
+                    // Se estiver em um post, busca os anúncios do post
+                    if (this.$route.path.startsWith('/post/')) {
+                        const slug = this.$route.params.slug;
+                        try {
+                            const post = await store.getPostBySlug(slug);
+                            this.sidebarAds = store.getActiveAds(post);
+                        } catch (error) {
+                            console.error('Erro ao carregar anúncios:', error);
+                            this.sidebarAds = [];
+                        }
+                    } else {
+                        this.sidebarAds = [];
+                    }
                 }
             },
             mounted() {
                 this.loadSidebarAds();
+
+                // Escutar evento de post carregado
+                this.$root.$on('post-loaded', (post) => {
+                    this.sidebarAds = store.getActiveAds(post);
+                });
             },
             watch: {
                 '$route'() {
@@ -1191,7 +903,8 @@
             }
         });
 
-        app.use(router); app.mount('#app');
+        app.use(router);
+        app.mount('#app');
     </script>
 </body>
 
