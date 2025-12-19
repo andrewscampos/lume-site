@@ -21,7 +21,8 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
+    <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6974524299465436"
         crossorigin="anonymous"></script>
@@ -661,6 +662,7 @@
 
         <!-- Footer -->
         <footer class="text-gray-800 py-12" style="background: var(--color-grad)">
+            <div id="ezoic-pub-ad-placeholder-101"></div>
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h2 class="text-2xl font-bold sub-title">LumiCode</h2>
@@ -1030,5 +1032,18 @@
         app.mount('#app');
     </script>
 </body>
+<script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+<script>
+    window.ezstandalone = window.ezstandalone || {};
+    ezstandalone.cmd = ezstandalone.cmd || [];
+</script>
+
+
+<script>
+    ezstandalone.cmd.push(function () {
+        ezstandalone.showAds(101);
+    });
+    ezstandalone.showAds()
+</script>
 
 </html>
