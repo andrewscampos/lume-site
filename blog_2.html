@@ -22,12 +22,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Ezoic -->
-    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6974524299465436"
+        crossorigin="anonymous"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
     <style>
         * {
-            zoom: 0.95
+            zoom: 0.97
         }
 
         /* CSS Completo do Blog */
@@ -486,19 +488,6 @@
             transform: scale(1.05);
         }
 
-        /* Ezoic Ad Container */
-        .ezoic-ad-container {
-            margin: 1.5rem 0;
-            min-height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(19, 19, 21, 0.4);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #2a2a2a;
-        }
-
         /* Loading & Empty States */
         .loading {
             text-align: center;
@@ -545,6 +534,19 @@
 
         .empty-state p {
             font-size: 1.1rem;
+        }
+
+        /* Google AdSense Container */
+        .adsense-container {
+            margin: 2rem 0;
+            min-height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(19, 19, 21, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
         }
 
         /* Responsivo */
@@ -630,20 +632,15 @@
                 <h3><i class="fas fa-bullhorn"></i> Anúncios</h3>
 
                 <template v-if="isHomePage">
-                    <!-- Ezoic Ads para Home Page -->
-                    <div class="ezoic-ad-container">
-                        <div id="ezoic-pub-ad-placeholder-102"></div>
-                    </div>
-                    <div class="ezoic-ad-container">
-                        <div id="ezoic-pub-ad-placeholder-103"></div>
-                    </div>
-                    <div class="ezoic-ad-container">
-                        <div id="ezoic-pub-ad-placeholder-104"></div>
+                    <div class="adsense-container" v-for="i in 3" style="margin: 0 0 1.5rem 0;">
+                        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-6974524299465436"
+                            data-ad-slot="6752427405" data-auto-format="rspv" data-full-width="">
+                            <div overflow=""></div>
+                        </amp-ad>
                     </div>
                 </template>
 
                 <template v-else>
-                    <!-- Anúncios customizados do post -->
                     <a v-for="ad in sidebarAds" :key="ad.id" :href="ad.url" target="_blank" class="ad-card">
                         <img v-if="ad.imageUrl" :src="ad.imageUrl" :alt="ad.title" class="ad-image">
                         <div class="ad-content">
@@ -652,12 +649,6 @@
                             <span class="ad-cta">{{ ad.cta || 'Saiba Mais' }}</span>
                         </div>
                     </a>
-
-                    <!-- Ezoic Ads adicionais na sidebar de posts -->
-                    <div class="ezoic-ad-container">
-                        <div id="ezoic-pub-ad-placeholder-105"></div>
-                    </div>
-
                     <div v-if="sidebarAds.length === 0"
                         style="color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem;">
                         <i class="fas fa-info-circle"
@@ -670,9 +661,6 @@
 
         <!-- Footer -->
         <footer class="text-gray-800 py-12" style="background: var(--color-grad)">
-            <!-- Ezoic Ad no Footer -->
-            <div id="ezoic-pub-ad-placeholder-101"></div>
-
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h2 class="text-2xl font-bold sub-title">LumiCode</h2>
@@ -1021,28 +1009,12 @@
                     } else {
                         this.sidebarAds = [];
                     }
-                },
-                initEzoicAds() {
-                    // Inicializar Ezoic quando a página estiver pronta
-                    if (window.ezstandalone) {
-                        window.ezstandalone.cmd = window.ezstandalone.cmd || [];
-
-                        // Mostrar todos os ads
-                        window.ezstandalone.cmd.push(function () {
-                            window.ezstandalone.showAds(101); // Footer
-                            window.ezstandalone.showAds(102); // Sidebar Home 1
-                            window.ezstandalone.showAds(103); // Sidebar Home 2
-                            window.ezstandalone.showAds(104); // Sidebar Home 3
-                            window.ezstandalone.showAds(105); // Sidebar Post
-                        });
-                    }
                 }
             },
             mounted() {
                 this.loadSidebarAds();
-                this.initEzoicAds();
 
-                // Escutar evento de post carregado
+                // // Escutar evento de post carregado
                 this.$root.$on('post-loaded', (post) => {
                     this.sidebarAds = store.getActiveAds(post);
                 });
@@ -1050,28 +1022,12 @@
             watch: {
                 '$route'() {
                     this.loadSidebarAds();
-
-                    // Reinicializar Ezoic ads ao mudar de rota
-                    this.$nextTick(() => {
-                        this.initEzoicAds();
-                    });
                 }
             }
         });
 
         app.use(router);
         app.mount('#app');
-    </script>
-
-    <!-- Inicialização do Ezoic -->
-    <script>
-        window.ezstandalone = window.ezstandalone || {};
-        ezstandalone.cmd = ezstandalone.cmd || [];
-
-        // Comando para mostrar todos os anúncios quando o Ezoic estiver pronto
-        ezstandalone.cmd.push(function () {
-            ezstandalone.showAds();
-        });
     </script>
 </body>
 
