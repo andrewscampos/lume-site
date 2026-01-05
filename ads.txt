@@ -9,6 +9,7 @@
 # Encontre seu ID em: https://adsense.google.com/
 google.com, pub-6974524299465436, DIRECT, f08c47fec0942fa0
 
+
 # ============================================
 # GOOGLE AD EXCHANGE (AdX)
 # ============================================
