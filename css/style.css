@@ -526,5 +526,98 @@ main .container {
         margin: 0 auto;
     }
 
+    /* =========================
+   BLOCO SEO – SERVIÇOS
+   ========================= */
+
+    .seo-services {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .seo-services h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1f2937;
+        /* ajuste para sua paleta */
+        text-align: center;
+    }
+
+    .seo-services>p {
+        max-width: 900px;
+        margin: 0 auto 50px auto;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #4b5563;
+        text-align: center;
+    }
+
+    /* LISTA DE SERVIÇOS */
+    .seo-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+    }
+
+    .seo-links li {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 30px 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.25s ease;
+    }
+
+    .seo-links li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* LINK PRINCIPAL */
+    .seo-links li a {
+        display: block;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #16a34a;
+        /* verde da marca */
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .seo-links li a:hover {
+        text-decoration: underline;
+    }
+
+    /* DESCRIÇÃO */
+    .seo-links li p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #374151;
+        margin: 0;
+    }
+
+    /* =========================
+   RESPONSIVO
+   ========================= */
+
+    @media (max-width: 768px) {
+        .seo-services {
+            padding: 60px 16px;
+        }
+
+        .seo-services h2 {
+            font-size: 1.8rem;
+        }
+
+        .seo-services>p {
+            font-size: 1rem;
+        }
+    }
+
 
 }
