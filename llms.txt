@@ -1,0 +1,44 @@
+# LumiCode - Agência de Desenvolvimento Web em São Paulo
+
+## Sobre a Empresa
+LumiCode é uma agência especializada em desenvolvimento web, criação de sites profissionais, e-commerce e sistemas personalizados em São Paulo, Brasil.
+
+## Serviços Principais
+- Criação de Sites Institucionais
+- Desenvolvimento de E-commerce
+- Sistemas Web Personalizados
+- Catálogo de Produtos Online
+- SEO e Marketing Digital
+- CMS (Content Management System)
+- Sites Multilíngue
+- Área Restrita para Membros
+
+## Tecnologias Utilizadas
+- React
+- Angular
+- Flutter
+- HTML5/CSS3
+- JavaScript
+- PHP
+- Node.js
+
+## Informações de Contato
+- Website: https://lumicode.com.br
+- E-mail: contato@lumicode.com.br
+- Telefone: (11) 94957-7030
+- WhatsApp: +55 11 94957-7030
+- Endereço: Rua James Ensor, 119 - Parque Regina, São Paulo - SP
+
+## Diferenciais
+- Sites responsivos mobile-first
+- Otimização para SEO
+- Desenvolvimento ágil
+- Suporte técnico completo
+- Entrega dentro do prazo
+- Design personalizado
+
+## Público-Alvo
+Pequenas e médias empresas, profissionais liberais, e-commerce, prestadores de serviços, consultorias, instituições educacionais.
+
+## Áreas de Atuação
+São Paulo e região metropolitana, atendimento nacional e internacional.

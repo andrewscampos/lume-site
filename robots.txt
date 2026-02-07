@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://lumicode.com.br/sitemap.xml
+
+# Block sensitive areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Crawl-delay (optional, good for large sites)
+Crawl-delay: 1
